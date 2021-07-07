@@ -32,9 +32,10 @@ Module.register('swag-training-authors', {
     navigation: [{
         id: 'authors.listing',
         label: 'authors.general.mainMenuItemGeneral',
-        color: '#FFCC00',
+        color: '#ffcc00',
         icon: 'default-device-dashboard',
         path: 'swag.training.authors.index',
-        position: 1
+        parent: 'sw-catalogue',
+        position: 100
     }]
 });
