@@ -1,0 +1,21 @@
+{
+  "authors": {
+    "general": {
+      "mainMenuItemGeneral": "Example Authors",
+      "descriptionTextModule": "Management of example authors"
+    },
+    "listing": {
+      "name": "Name",
+      "description": "Description",
+      "birthdate": "Birthdate",
+      "contextMenuEdit": "Edit"
+    },
+    "form": {
+      "buttonSave": "Save",
+      "buttonCancel": "Cancel",
+      "name": "Name",
+      "description": "Description",
+      "birthdate": "Birthdate"
+    }
+  }
+}

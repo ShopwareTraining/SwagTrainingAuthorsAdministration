@@ -1,0 +1,28 @@
+{% block author_listing %}
+    <sw-page class="author-listing">
+        <template #content>
+            <sw-card>
+                <h2>Author listing</h2>
+                <sw-entity-listing
+                        v-if="authors"
+                        ref="swagTrainingAuthorsAdministration"
+                        class="author-listing-grid"
+                        :repository="authorRepository"
+                        :items="authors"
+                        :columns="getGridColumns()"
+                        :fullPage="false"
+                        :isLoading="isLoading"
+                        detailRoute="swag.training.authors.form"
+                >
+                    <template #actions="{ item }">
+
+                        <sw-context-menu-item class="author-listing__author-edit-action"
+                                              :routerLink="{ name: 'swag.training.authors.form', params: { id: item.id } }">
+                            {{ $tc('authors.listing.contextMenuEdit') }}
+                        </sw-context-menu-item>
+                    </template>
+                </sw-entity-listing>
+            </sw-card>
+        </template>
+    </sw-page>
+{% endblock %}

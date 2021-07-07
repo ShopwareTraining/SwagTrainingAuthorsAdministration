@@ -1,0 +1,17 @@
+{
+  "name": "swag-training/authors-administration",
+  "description": "Authors administration",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SwagTraining\\AuthorsAdministration\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "SwagTraining\\AuthorsAdministration\\SwagTrainingAuthorsAdministration",
+    "label": {
+      "en-GB": "Authors administration"
+    }
+  }
+}
