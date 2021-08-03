@@ -2,8 +2,9 @@ import template from './template.html.twig';
 import './style.scss';
 
 const {Component, Mixin} = Shopware;
+const {Criteria} = Shopware.Data;
 
-Component.register('author-form-page', {
+Component.register('swag-training-authors-form-page', {
     template,
 
     inject: [
@@ -26,7 +27,8 @@ Component.register('author-form-page', {
         return {
             author: {},
             isLoading: false,
-            isSaveSuccessful: false
+            isSaveSuccessful: false,
+            customFieldSets: []
         };
     },
 
@@ -36,6 +38,16 @@ Component.register('author-form-page', {
         },
         authorRepository() {
             return this.repositoryFactory.create('author');
+        },
+        customFieldSetRepository() {
+            return this.repositoryFactory.create('custom_field_set');
+        },
+        customFieldSetCriteria() {
+            const criteria = new Criteria();
+            criteria.addFilter(Criteria.equals('relations.entityName', 'author'));
+            criteria.getAssociation('customFields')
+                .addSorting(Criteria.sort('config.customFieldPosition', 'ASC', true));
+            return criteria;
         }
     },
 
@@ -48,11 +60,12 @@ Component.register('author-form-page', {
     },
 
     created() {
-        this.getAuthor();
+        this.loadAuthor();
+        this.loadCustomFieldSets();
     },
 
     methods: {
-        getAuthor() {
+        loadAuthor() {
             this.isLoading = true;
             if (!this.authorId) {
                 this.authorId = this.$route.query.id;
@@ -65,6 +78,18 @@ Component.register('author-form-page', {
                     this.isLoading = false;
                 });
             }
+        },
+
+        loadCustomFieldSets() {
+            this.customFieldSetRepository.search(this.customFieldSetCriteria)
+                .then(items => {
+                    this.customFieldSets = items;
+                })
+                .catch(() => {
+                    this.createNotificationError({
+                        message: this.$tc('sw-settings-search.notification.loadError')
+                    });
+                });
         },
 
         loadEntityData() {

@@ -48,6 +48,14 @@
                         v-model="author.birthdate">
                 </sw-field>
             </sw-card>
+
+            <sw-card title="Custom fields">
+                <sw-custom-field-set-renderer
+                        :entity="author"
+                        :sets="customFieldSets"
+                        showCustomFieldSetSelection>
+                </sw-custom-field-set-renderer>
+            </sw-card>
         </sw-card-view>
     </sw-page>
 {% endblock %}

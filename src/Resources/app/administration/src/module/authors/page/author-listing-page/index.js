@@ -4,7 +4,7 @@ import './style.scss';
 const {Component, Mixin} = Shopware;
 const {Criteria} = Shopware.Data;
 
-Component.register('author-listing-page', {
+Component.register('swag-training-authors-listing-page', {
     template,
 
     inject: [
