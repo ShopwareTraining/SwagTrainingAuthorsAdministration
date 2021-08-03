@@ -1,5 +1,6 @@
 import './page/author-listing-page';
 import './page/author-form-page';
+import './acl';
 
 const { Module } = Shopware;
 
@@ -17,25 +18,32 @@ Module.register('swag-training-authors', {
     routes: {
         index: {
             components: {
-                default: 'author-listing-page'
+                default: 'swag-training-authors-listing-page'
             },
-            path: 'index'
+            path: 'index',
+            meta: {
+                privilege: 'author.viewer'
+            }
         },
         form: {
             components: {
-                default: 'author-form-page'
+                default: 'swag-training-authors-form-page'
             },
-            path: 'form'
+            path: 'form',
+            meta: {
+                privilege: 'author.editor'
+            }
         }
     },
 
     navigation: [{
         id: 'authors.listing',
+        privilege: 'product.viewer',
         label: 'authors.general.mainMenuItemGeneral',
         color: '#ffcc00',
         icon: 'default-device-dashboard',
         path: 'swag.training.authors.index',
-        parent: 'sw-catalogue',
-        position: 100
+        parent: 'sw-catalogue'
     }]
 });
+

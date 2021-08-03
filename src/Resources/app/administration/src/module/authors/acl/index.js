@@ -1,13 +1,14 @@
 Shopware.Service('privileges')
     .addPrivilegeMappingEntry({
         category: 'permissions',
-        parent: 'settings',
+        parent: null,
         key: 'author',
         roles: {
             viewer: {
                 privileges: [
                     'author:read'
-                ]
+                ],
+                dependencies: []
             },
             creator: {
                 privileges: [
@@ -17,7 +18,6 @@ Shopware.Service('privileges')
                     'author.viewer',
                     'author.editor'
                 ]
-
             },
             editor: {
                 privileges: [
@@ -26,7 +26,6 @@ Shopware.Service('privileges')
                 dependencies: [
                     'author.viewer'
                 ]
-
             },
             deleter: {
                 privileges: [
