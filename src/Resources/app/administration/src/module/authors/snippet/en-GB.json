@@ -17,5 +17,17 @@
       "description": "Description",
       "birthdate": "Birthdate"
     }
+  },
+  "global": {
+    "entities": {
+      "author": "Author"
+    }
+  },
+  "sw-privileges": {
+    "permissions": {
+      "author": {
+        "label": "Authors"
+      }
+    }
   }
 }
