@@ -2,7 +2,6 @@ import template from './template.html.twig';
 import './style.scss';
 
 const {Component, Mixin} = Shopware;
-const {Criteria} = Shopware.Data;
 
 Component.register('swag-training-authors-form-page', {
     template,
@@ -27,7 +26,6 @@ Component.register('swag-training-authors-form-page', {
         return {
             author: {},
             isLoading: false,
-            customFieldSets: [],
             datepickerConfig: {
                 dateFormat: "Y-m-d"
             }
@@ -37,22 +35,11 @@ Component.register('swag-training-authors-form-page', {
     computed: {
         authorRepository() {
             return this.repositoryFactory.create('author');
-        },
-        customFieldSetRepository() {
-            return this.repositoryFactory.create('custom_field_set');
-        },
-        customFieldSetCriteria() {
-            const criteria = new Criteria();
-            criteria.addFilter(Criteria.equals('relations.entityName', 'author'));
-            criteria.getAssociation('customFields')
-                .addSorting(Criteria.sort('config.customFieldPosition', 'ASC', true));
-            return criteria;
         }
     },
 
     created() {
         this.loadAuthor();
-        this.loadCustomFieldSets();
     },
 
     methods: {
@@ -77,18 +64,6 @@ Component.register('swag-training-authors-form-page', {
                     this.authorId = this.$route.params.id;
                 }
             }
-        },
-
-        loadCustomFieldSets() {
-            this.customFieldSetRepository.search(this.customFieldSetCriteria)
-                .then(items => {
-                    this.customFieldSets = items;
-                })
-                .catch(() => {
-                    this.createNotificationError({
-                        message: this.$tc('sw-settings-search.notification.loadError')
-                    });
-                });
         },
 
         onSave() {
