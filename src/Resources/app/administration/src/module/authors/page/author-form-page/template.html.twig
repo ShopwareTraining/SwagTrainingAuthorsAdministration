@@ -28,7 +28,6 @@
         <sw-card-view slot="content">
             <sw-card>
                 <h2>Author edit</h2>
-
                 <sw-field
                         type="text"
                         required
@@ -47,21 +46,14 @@
                         v-model="author.description">
                 </sw-field>
 
-                <sw-datepicker
+                <sw-field
+                        type="text"
                         required
+                        :disabled="!acl.can('authors.editor')"
                         :label="$tc('authors.form.birthdate')"
                         :placeholder="placeholder(author, 'birthdate', $tc('authors.form.birthdate'))"
-                        :config="datepickerConfig"
                         v-model="author.birthdate">
-                </sw-datepicker>
-            </sw-card>
-
-            <sw-card title="Custom fields">
-                <sw-custom-field-set-renderer
-                        :entity="author"
-                        :sets="customFieldSets"
-                        showCustomFieldSetSelection>
-                </sw-custom-field-set-renderer>
+                </sw-field>
             </sw-card>
         </sw-card-view>
     </sw-page>
