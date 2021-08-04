@@ -36,9 +36,6 @@ Component.register('swag-training-authors-form-page', {
     },
 
     computed: {
-        //identifier() {
-        //    return this.placeholder(this.author, 'name');
-        //},
         authorRepository() {
             return this.repositoryFactory.create('author');
         },
