@@ -1,5 +1,4 @@
 import template from './template.html.twig';
-import './style.scss';
 
 const {Component, Mixin} = Shopware;
 const {Criteria} = Shopware.Data;
@@ -8,8 +7,7 @@ Component.register('swag-training-authors-listing-page', {
     template,
 
     inject: [
-        'repositoryFactory',
-        'acl'
+        'repositoryFactory'
     ],
 
     mixins: [
@@ -37,7 +35,14 @@ Component.register('swag-training-authors-listing-page', {
     },
 
     created() {
-        this.getList();
+        this.isLoading = true;
+        this.authorRepository.search(this.getCriteria(), Shopware.Context.api).then(result => {
+            this.authors = result;
+            this.total = result.total;
+            return result;
+        }).finally(() => {
+            this.isLoading = false;
+        });
     },
 
     methods: {
@@ -53,17 +58,6 @@ Component.register('swag-training-authors-listing-page', {
             );
 
             return criteria;
-        },
-
-        getList() {
-            this.isLoading = true;
-            this.authorRepository.search(this.getCriteria(), Shopware.Context.api).then(result => {
-                this.authors = result;
-                this.total = result.total;
-                return result;
-            }).finally(() => {
-                this.isLoading = false;
-            });
         },
 
         onInlineEditSave(author) {

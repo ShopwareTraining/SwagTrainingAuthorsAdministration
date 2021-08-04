@@ -1,5 +1,4 @@
 import template from './template.html.twig';
-import './style.scss';
 
 const {Component, Mixin} = Shopware;
 
@@ -7,8 +6,7 @@ Component.register('swag-training-authors-form-page', {
     template,
 
     inject: [
-        'repositoryFactory',
-        'acl'
+        'repositoryFactory'
     ],
 
     mixins: [
@@ -25,10 +23,7 @@ Component.register('swag-training-authors-form-page', {
     data() {
         return {
             author: {},
-            isLoading: false,
-            datepickerConfig: {
-                dateFormat: "Y-m-d"
-            }
+            isLoading: false
         };
     },
 
@@ -39,33 +34,26 @@ Component.register('swag-training-authors-form-page', {
     },
 
     created() {
-        this.loadAuthor();
+        this.isLoading = true;
+        this.author = this.authorRepository.create(Shopware.Context.api);
+
+        if (!this.authorId) {
+            this.authorId = this.$route.query.id;
+            if (!this.authorId) {
+                this.authorId = this.$route.params.id;
+            }
+        }
+
+        this.authorRepository.get(this.authorId, Shopware.Context.api).then((author) => {
+            if (author) {
+                this.author = author;
+            }
+
+            this.isLoading = false;
+        });
     },
 
     methods: {
-        loadAuthor() {
-            this.isLoading = true;
-            this.author = this.authorRepository.create(Shopware.Context.api);
-            this.loadAuthorId();
-
-            this.authorRepository.get(this.authorId, Shopware.Context.api).then((author) => {
-                if (author) {
-                    this.author = author;
-                }
-
-                this.isLoading = false;
-            });
-        },
-
-        loadAuthorId() {
-            if (!this.authorId) {
-                this.authorId = this.$route.query.id;
-                if (!this.authorId) {
-                    this.authorId = this.$route.params.id;
-                }
-            }
-        },
-
         onSave() {
             this.isLoading = true;
             return this.authorRepository.save(this.author, Shopware.Context.api).then(() => {

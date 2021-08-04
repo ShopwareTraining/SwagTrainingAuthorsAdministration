@@ -8,7 +8,7 @@
             </sw-button>
 
             <sw-button
-                    :disabled="isLoading || !acl.can('authors.editor')"
+                    :disabled="isLoading"
                     variant="primary"
                     @click.prevent="onSave">
                 {{ $tc('authors.form.buttonSave') }}
@@ -22,7 +22,6 @@
                 <sw-field
                         type="text"
                         required
-                        :disabled="!acl.can('authors.editor')"
                         :label="$tc('authors.form.name')"
                         :placeholder="placeholder(author, 'name', $tc('authors.form.name'))"
                         v-model="author.name">
@@ -31,19 +30,18 @@
                 <sw-field
                         type="text"
                         required
-                        :disabled="!acl.can('authors.editor')"
                         :label="$tc('authors.form.description')"
                         :placeholder="placeholder(author, 'description', $tc('authors.form.description'))"
                         v-model="author.description">
                 </sw-field>
 
-                <sw-datepicker
+                <sw-field
+                        type="text"
                         required
                         :label="$tc('authors.form.birthdate')"
                         :placeholder="placeholder(author, 'birthdate', $tc('authors.form.birthdate'))"
-                        :config="datepickerConfig"
                         v-model="author.birthdate">
-                </sw-datepicker>
+                </sw-field>
             </sw-card>
         </sw-card-view>
     </sw-page>
