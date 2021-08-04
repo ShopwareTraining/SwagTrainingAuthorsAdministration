@@ -12,7 +12,6 @@
       "contextMenuEdit": "Edit"
     },
     "form": {
-      "buttonSaveAndContinue": "Save & Continue",
       "buttonSave": "Save",
       "buttonCancel": "Cancel",
       "name": "Name",

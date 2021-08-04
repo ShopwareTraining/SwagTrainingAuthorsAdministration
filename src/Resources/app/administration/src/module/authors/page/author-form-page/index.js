@@ -27,7 +27,6 @@ Component.register('swag-training-authors-form-page', {
         return {
             author: {},
             isLoading: false,
-            isSaveSuccessful: false,
             customFieldSets: [],
             datepickerConfig: {
                 dateFormat: "Y-m-d"
@@ -36,9 +35,6 @@ Component.register('swag-training-authors-form-page', {
     },
 
     computed: {
-        //identifier() {
-        //    return this.placeholder(this.author, 'name');
-        //},
         authorRepository() {
             return this.repositoryFactory.create('author');
         },
@@ -95,39 +91,10 @@ Component.register('swag-training-authors-form-page', {
                 });
         },
 
-        saveFinish() {
-            this.isSaveSuccessful = false;
-        },
-
-        onSaveAndContinue() {
-            this.save(() => {
-                if (!this.authorId) {
-                    this.$router.push({name: 'swag.training.authors.form', params: {id: this.author.id}});
-                }
-
-                this.isLoading = true;
-                this.authorRepository.get(this.author.id, Shopware.Context.api).then(author => {
-                    this.author = author;
-                    this.isLoading = false;
-                });
-            });
-        },
-
         onSave() {
-            this.save(() => {
-                this.$router.push({name: 'swag.training.authors.index'});
-            });
-        },
-
-        save(postSaveAction) {
-            this.saveFinish();
             this.isLoading = true;
-
             return this.authorRepository.save(this.author, Shopware.Context.api).then(() => {
-                this.isSaveSuccessful = true;
-                this.isLoading = false;
-
-                postSaveAction();
+                this.$router.push({name: 'swag.training.authors.index'});
             }).catch(() => {
                 this.createNotificationError({
                     message: this.$tc('detail.form.notificationErrorMessage')
@@ -138,14 +105,6 @@ Component.register('swag-training-authors-form-page', {
 
         onCancel() {
             this.$router.push({name: 'swag.training.authors.index'});
-        }
-    },
-
-    watch: {
-        authorId() {
-            if (this.authorId && !this.author) {
-                //this.loadAuthor();
-            }
         }
     }
 });

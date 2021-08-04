@@ -13,16 +13,6 @@
                     @click.prevent="onSave">
                 {{ $tc('authors.form.buttonSave') }}
             </sw-button>
-
-            <sw-button-process
-                    class="authors-form__save-action"
-                    :isLoading="isLoading"
-                    v-model="isSaveSuccessful"
-                    :disabled="isLoading || !acl.can('authors.editor')"
-                    @process-finish="saveFinish"
-                    @click.prevent="onSaveAndContinue">
-                {{ $tc('authors.form.buttonSaveAndContinue') }}
-            </sw-button-process>
         </template>
 
         <sw-card-view slot="content">
