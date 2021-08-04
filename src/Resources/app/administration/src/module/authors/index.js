@@ -29,7 +29,7 @@ Module.register('swag-training-authors', {
             components: {
                 default: 'swag-training-authors-form-page'
             },
-            path: 'form',
+            path: 'edit/:id',
             meta: {
                 privilege: 'author.editor'
             }
@@ -38,7 +38,7 @@ Module.register('swag-training-authors', {
 
     navigation: [{
         id: 'authors.listing',
-        privilege: 'product.viewer',
+        privilege: 'author.viewer',
         label: 'authors.general.mainMenuItemGeneral',
         color: '#ffcc00',
         icon: 'default-device-dashboard',

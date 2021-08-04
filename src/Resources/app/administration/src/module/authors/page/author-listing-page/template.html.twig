@@ -1,5 +1,11 @@
 {% block author_listing %}
     <sw-page class="author-listing">
+        <template slot="smart-bar-actions">
+            <sw-button @click="onCreateNew">
+                {{ $tc('authors.listing.buttonCreateNew') }}
+            </sw-button>
+        </template>
+
         <template #content>
             <sw-card>
                 <h2>Author listing</h2>

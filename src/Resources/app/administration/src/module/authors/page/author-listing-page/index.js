@@ -36,7 +36,7 @@ Component.register('swag-training-authors-listing-page', {
         }
     },
 
-    createdComponent() {
+    created() {
         this.getList();
     },
 
@@ -86,6 +86,10 @@ Component.register('swag-training-authors-listing-page', {
                 label: 'authors.listing.birthdate',
                 allowResize: true
             }]
+        },
+
+        onCreateNew() {
+            this.$router.push({ name: 'swag.training.authors.form' });
         }
     }
 });

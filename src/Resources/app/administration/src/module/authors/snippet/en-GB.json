@@ -5,12 +5,14 @@
       "descriptionTextModule": "Management of example authors"
     },
     "listing": {
+      "buttonCreateNew": "New Author",
       "name": "Name",
       "description": "Description",
       "birthdate": "Birthdate",
       "contextMenuEdit": "Edit"
     },
     "form": {
+      "buttonSaveAndContinue": "Save & Continue",
       "buttonSave": "Save",
       "buttonCancel": "Cancel",
       "name": "Name",

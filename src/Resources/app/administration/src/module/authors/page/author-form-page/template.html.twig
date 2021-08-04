@@ -1,8 +1,17 @@
 {% block author_form %}
     <sw-page class="author-form">
         <template slot="smart-bar-actions">
-            <sw-button :disabled="isLoading" @click="onCancel">
+            <sw-button
+                    :disabled="isLoading"
+                    @click.prevent="onCancel">
                 {{ $tc('authors.form.buttonCancel') }}
+            </sw-button>
+
+            <sw-button
+                    :disabled="isLoading || !acl.can('authors.editor')"
+                    variant="primary"
+                    @click.prevent="onSave">
+                {{ $tc('authors.form.buttonSave') }}
             </sw-button>
 
             <sw-button-process
@@ -10,10 +19,9 @@
                     :isLoading="isLoading"
                     v-model="isSaveSuccessful"
                     :disabled="isLoading || !acl.can('authors.editor')"
-                    variant="primary"
                     @process-finish="saveFinish"
-                    @click.prevent="onSave">
-                {{ $tc('authors.form.buttonSave') }}
+                    @click.prevent="onSaveAndContinue">
+                {{ $tc('authors.form.buttonSaveAndContinue') }}
             </sw-button-process>
         </template>
 
@@ -39,14 +47,13 @@
                         v-model="author.description">
                 </sw-field>
 
-                <sw-field
-                        type="text"
+                <sw-datepicker
                         required
-                        :disabled="!acl.can('authors.editor')"
                         :label="$tc('authors.form.birthdate')"
                         :placeholder="placeholder(author, 'birthdate', $tc('authors.form.birthdate'))"
+                        :config="datepickerConfig"
                         v-model="author.birthdate">
-                </sw-field>
+                </sw-datepicker>
             </sw-card>
 
             <sw-card title="Custom fields">
