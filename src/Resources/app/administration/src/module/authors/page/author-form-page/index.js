@@ -136,13 +136,5 @@ Component.register('swag-training-authors-form-page', {
         onCancel() {
             this.$router.push({name: 'swag.training.authors.index'});
         }
-    },
-
-    watch: {
-        authorId() {
-            if (this.authorId && !this.author) {
-                //this.loadAuthor();
-            }
-        }
     }
 });
