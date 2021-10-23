@@ -36,7 +36,7 @@ Component.register('swag-training-authors-listing-page', {
 
     created() {
         this.isLoading = true;
-        this.authorRepository.search(this.getCriteria(), Shopware.Context.api).then(result => {
+        this.authorRepository.search(this.getCriteria()).then(result => {
             this.authors = result;
             this.total = result.total;
             return result;

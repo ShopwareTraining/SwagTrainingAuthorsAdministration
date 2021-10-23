@@ -9,6 +9,10 @@
         <template #content>
             <sw-card>
                 <h2>Author listing</h2>
+                <sw-loader size="50px" v-if="isLoading">
+                    Loading
+                </sw-loader>
+
                 <sw-entity-listing
                         v-if="authors"
                         ref="swagTrainingAuthorsAdministration"
