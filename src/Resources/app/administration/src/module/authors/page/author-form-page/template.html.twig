@@ -18,7 +18,6 @@
         <sw-card-view slot="content">
             <sw-card>
                 <h2>Author edit</h2>
-
                 <sw-field
                         type="text"
                         required
@@ -38,6 +37,7 @@
                 <sw-field
                         type="text"
                         required
+                        :disabled="!acl.can('authors.editor')"
                         :label="$tc('authors.form.birthdate')"
                         :placeholder="placeholder(author, 'birthdate', $tc('authors.form.birthdate'))"
                         v-model="author.birthdate">
